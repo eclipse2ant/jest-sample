@@ -44,5 +44,5 @@ function statement (invoice, plays) {
   result += `You earned ${volumeCredits} credits\n`;
   return result;
 }
-
-console.log(statement(invoice[0],plays));
+module.exports = statement;
+//console.log(statement(invoice[0],plays));
