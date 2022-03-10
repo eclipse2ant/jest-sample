@@ -45,4 +45,4 @@ function statement (invoice, plays) {
   return result;
 }
 
-statement(invoice,plays);
+console.log(statement(invoice[0],plays));
