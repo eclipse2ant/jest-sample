@@ -1,6 +1,6 @@
-const statement = require('./statement');
+const {statement, amountFor} = require('./statement');
 
-test('object assignment', () => {
+test('statement', () => {
   let result = 'Statement for BigCo\n';
   result += '  Hamlet: $650.00 (55 seats)\n';
   result += '  As You Like It: $580.00 (35 seats)\n';
@@ -11,3 +11,7 @@ test('object assignment', () => {
   const plays = require('./plays.json');
   expect(statement(invoice[0],plays)).toBe(result);
 });
+
+test('amountFor', () => {
+  expect(1).toBe(1);
+})
