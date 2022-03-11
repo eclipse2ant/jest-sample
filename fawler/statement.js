@@ -12,7 +12,7 @@ function statement (invoice, plays) {
   for (let perf of invoice.performances) {
     const play = plays[perf.playID];
     let thisAmount = amountFor(perf, play);
-    
+
     // add volume credits
     volumeCredits += Math.max(perf.audience - 30, 0);
     // add extra credit for every ten comedy attendees
@@ -49,5 +49,7 @@ function amountFor(perf, play) {
   return thisAmount;
 }
 
-module.exports = {statement};
+//module.exports = {statement, amountFor};
+module.exports.statement=statement;
+module.exports.amountFor=amountFor;
 //console.log(statement(invoice[0],plays));
