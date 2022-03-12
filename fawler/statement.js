@@ -10,16 +10,15 @@ function statement (invoice) {
                           minimumFractionDigits: 2 }).format;
 
   for (let perf of invoice.performances) {
-    let thisAmount = amountFor(perf);
-
+    
     // add volume credits
     volumeCredits += Math.max(perf.audience - 30, 0);
     // add extra credit for every ten comedy attendees
     if ("comedy" === playFor(perf).type) volumeCredits += Math.floor(perf.audience / 5);
 
     // print line for this order
-    result += `  ${playFor(perf).name}: ${format(thisAmount/100)} (${perf.audience} seats)\n`;
-    totalAmount += thisAmount;
+    result += `  ${playFor(perf).name}: ${format(amountFor(perf)/100)} (${perf.audience} seats)\n`;
+    totalAmount += amountFor(perf);
   }
   result += `Amount owed is ${format(totalAmount/100)}\n`;
   result += `You earned ${volumeCredits} credits\n`;
@@ -56,7 +55,7 @@ module.exports = {statement, amountFor};
 //module.exports.statement=statement;
 //module.exports.amountFor=amountFor;
 
-console.log(statement(invoices[0]));
+//console.log(statement(invoices[0]));
 /*let aPerformances = invoices[0].aPerformanceormances
 console.log(aPerformances[0].playID);
 console.log(plays["hamlet"]);
