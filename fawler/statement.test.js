@@ -16,7 +16,7 @@ test('amountFor', () => {
   const invoices = require('./invoices.json');
   const plays = require('./plays.json');
   let perfs = invoices[0].performances;
-  expect(amountFor(invoices[0].performances[0],plays["hamlet"])).toBe(65000);
-  expect(amountFor(invoices[0].performances[1],plays["as-like"])).toBe(58000);
-  expect(amountFor(invoices[0].performances[2],plays["othello"])).toBe(50000);
+  expect(amountFor(invoices[0].performances[0])).toBe(65000);
+  expect(amountFor(invoices[0].performances[1])).toBe(58000);
+  expect(amountFor(invoices[0].performances[2])).toBe(50000);
 });
