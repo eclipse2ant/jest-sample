@@ -7,13 +7,13 @@ test('statement', () => {
   result += '  Othello: $500.00 (40 seats)\n';
   result += 'Amount owed is $1,730.00\n';
   result += 'You earned 47 credits\n';
-  const invoices = require('./invoice.json');
+  const invoices = require('./invoices.json');
   const plays = require('./plays.json');
   expect(statement(invoices[0],plays)).toBe(result);
 });
 
 test('amountFor', () => {
-  const invoices = require('./invoice.json');
+  const invoices = require('./invoices.json');
   const plays = require('./plays.json');
   let perfs = invoices[0].performances;
   expect(amountFor(invoices[0].performances[0],plays["hamlet"])).toBe(65000);
