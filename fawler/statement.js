@@ -1,4 +1,4 @@
-const invoice = require('./invoice.json');
+const invoices = require('./invoice.json');
 const plays = require('./plays.json');
 
 function statement (invoice, plays) {
@@ -49,7 +49,13 @@ function amountFor(perf, play) {
   return thisAmount;
 }
 
-//module.exports = {statement, amountFor};
-module.exports.statement=statement;
-module.exports.amountFor=amountFor;
-//console.log(statement(invoice[0],plays));
+module.exports = {statement, amountFor};
+//module.exports.statement=statement;
+//module.exports.amountFor=amountFor;
+
+/*console.log(statement(invoices[0],plays));
+let perfs = invoices[0].performances
+console.log(perfs[0].playID);
+console.log(plays["hamlet"]);
+console.log(plays["as-like"])
+*/
