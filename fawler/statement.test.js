@@ -1,4 +1,5 @@
-const {statement, amountFor, volumeCreditsFor} = require('./statement');
+const {statement, amountFor, volumeCreditsFor, format}
+   = require('./statement');
 
 const invoices = require('./invoices.json');
 //  const plays = require('./plays.json');
@@ -24,4 +25,12 @@ test(`volumeCreditsFor`, () => {
   expect(volumeCreditsFor(invoices[0].performances[0])).toBe(25)
   expect(volumeCreditsFor(invoices[0].performances[1])).toBe(12)
   expect(volumeCreditsFor(invoices[0].performances[2])).toBe(10)
+});
+
+test(`format`, () => {
+  expect(format(10)).toBe('$10.00')
+  expect(format(0.1)).toBe('$0.10')
+  expect(format(-0.01)).toBe('-$0.01')
+  expect(format(-0.004)).toBe('-$0.00')
+  expect(format(-0.005)).toBe('-$0.01')
 });
