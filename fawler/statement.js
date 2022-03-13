@@ -9,10 +9,10 @@ function statement (invoice) {
   for (let perf of invoice.performances) {
     volumeCredits += volumeCreditsFor(perf);
     // print line for this order
-    result += `  ${playFor(perf).name}: ${format(amountFor(perf)/100)} (${perf.audience} seats)\n`;
+    result += `  ${playFor(perf).name}: ${usd(amountFor(perf)/100)} (${perf.audience} seats)\n`;
     totalAmount += amountFor(perf);
   }
-  result += `Amount owed is ${format(totalAmount/100)}\n`;
+  result += `Amount owed is ${usd(totalAmount/100)}\n`;
   result += `You earned ${volumeCredits} credits\n`;
   return result;
 }
@@ -24,7 +24,7 @@ function volumeCreditsFor(aPerformance) {
     return result;
 }
 
-function format(aNumber) {
+function usd(aNumber) {
   return new Intl.NumberFormat("en-US",
                       { style: "currency", currency: "USD",
                         minimumFractionDigits: 2 }).format(aNumber);
@@ -56,7 +56,7 @@ function playFor(aPerformance) {
   return plays[aPerformance.playID];
 }
 
-module.exports = {statement, amountFor, volumeCreditsFor, format};
+module.exports = {statement, amountFor, volumeCreditsFor, usd};
 //module.exports.statement=statement;
 //module.exports.amountFor=amountFor;
 
@@ -65,5 +65,5 @@ module.exports = {statement, amountFor, volumeCreditsFor, format};
 console.log(aPerformances[0].playID);
 console.log(plays["hamlet"]);
 console.log(plays["as-like"]);
-console.log(format(-0.005));
+console.log(usd(-0.005));
 */

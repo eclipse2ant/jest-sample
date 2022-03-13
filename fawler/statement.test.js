@@ -1,4 +1,4 @@
-const {statement, amountFor, volumeCreditsFor, format}
+const {statement, amountFor, volumeCreditsFor, usd}
    = require('./statement');
 
 const invoices = require('./invoices.json');
@@ -27,10 +27,10 @@ test(`volumeCreditsFor`, () => {
   expect(volumeCreditsFor(invoices[0].performances[2])).toBe(10)
 });
 
-test(`format`, () => {
-  expect(format(10)).toBe('$10.00')
-  expect(format(0.1)).toBe('$0.10')
-  expect(format(-0.01)).toBe('-$0.01')
-  expect(format(-0.004)).toBe('-$0.00')
-  expect(format(-0.005)).toBe('-$0.01')
+test(`usd`, () => {
+  expect(usd(10)).toBe('$10.00')
+  expect(usd(0.1)).toBe('$0.10')
+  expect(usd(-0.01)).toBe('-$0.01')
+  expect(usd(-0.004)).toBe('-$0.00')
+  expect(usd(-0.005)).toBe('-$0.01')
 });
