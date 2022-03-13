@@ -1,4 +1,6 @@
-const {statement, amountFor, volumeCreditsFor, usd, totalvolumeCredits}
+const {statement, amountFor, volumeCreditsFor, usd, totalvolumeCredits,
+  totalAmount
+}
    = require('./statement');
 
 const invoices = require('./invoices.json');
@@ -37,4 +39,8 @@ test(`usd`, () => {
 
 test('totalVolumeCredits', () => {
   expect(totalvolumeCredits(invoices[0])).toBe(47);
+});
+
+test('totalAmount', () => {
+  expect(totalAmount(invoices[0])).toBe(173000);
 });
