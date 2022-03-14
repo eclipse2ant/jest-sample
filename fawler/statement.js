@@ -78,7 +78,7 @@ function playFor(aPerformance) {
 
 module.exports = 
  {statement, amountFor, volumeCreditsFor, usd, totalvolumeCredits,
-  totalAmount
+  totalAmount, renderPlainText
 };
 //module.exports.statement=statement;
 //module.exports.amountFor=amountFor;
