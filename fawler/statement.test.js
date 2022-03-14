@@ -4,7 +4,7 @@ const {statement, amountFor, volumeCreditsFor, usd, totalvolumeCredits,
    = require('./statement');
 
 const invoices = require('./invoices.json');
-//  const plays = require('./plays.json');
+const plays = require('./plays.json');
 
 
 test('statement', () => {
@@ -14,7 +14,7 @@ test('statement', () => {
   result += '  Othello: $500.00 (40 seats)\n';
   result += 'Amount owed is $1,730.00\n';
   result += 'You earned 47 credits\n';
-  expect(statement(invoices[0])).toBe(result);
+  expect(statement(invoices[0], plays)).toBe(result);
 });
 
 test('amountFor', () => {
