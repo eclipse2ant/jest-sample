@@ -4,17 +4,31 @@ const plays = require('./plays.json');
 function statement (invoice, plays) {
   const statementData = {};
   statementData.customer = invoice.customer;
-  statementData.performances = invoice.performances;
+  statementData.performances = invoice.performances.map(enrichPerformance);
+  console.log(statementData);
   return renderPlainText(statementData, plays);
   
 }
+
+function enrichPerformance(aPerformance) {
+  const result = Object.assign({}, aPerformance);
+  result.play = playFor(result);
+ // console.log(result);
+  return result;
+}
+
+function playFor(aPerformance) {
+  return plays[aPerformance.playID];
+}
+
 
 function  renderPlainText(data, plays) {
   let result = `Statement for ${data.customer}\n`;
 
   for (let perf of data.performances) {
   // print line for this order
-    result += `  ${playFor(perf).name}: ${usd(amountFor(perf)/100)} (${perf.audience} seats)\n`;
+//    console.log(perf.play);
+    result += `  ${perf.play.name}: ${usd(amountFor(perf)/100)} (${perf.audience} seats)\n`;
   }
 
   result += `Amount owed is ${usd(totalAmount(data)/100)}\n`;
@@ -72,18 +86,14 @@ function amountFor(aPerformance) {
   return result;
 }
 
-function playFor(aPerformance) {
-  return plays[aPerformance.playID];
-}
-
 module.exports = 
  {statement, amountFor, volumeCreditsFor, usd, totalvolumeCredits,
-  totalAmount, renderPlainText
+  totalAmount, renderPlainText, enrichPerformance
 };
 //module.exports.statement=statement;
 //module.exports.amountFor=amountFor;
 
-//console.log(statement(invoices[0]));
+console.log(statement(invoices[0],plays));
 /*let aPerformances = invoices[0].aPerformanceormances
 console.log(aPerformances[0].playID);
 console.log(plays["hamlet"]);
@@ -91,4 +101,7 @@ console.log(plays["as-like"]);
 console.log(usd(-0.005));
 console.log(totalvolumeCredits(invoices[0]));
 console.log(totalAmount(invoices[0]));
+console.log(enrichPerformance(invoices[0].performances[0]));
+console.log(enrichPerformance(invoices[0].performances[1]));
+console.log(enrichPerformance(invoices[0].performances[2]));
 */

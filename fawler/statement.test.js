@@ -1,5 +1,5 @@
 const {statement, amountFor, volumeCreditsFor, usd, totalvolumeCredits,
-  totalAmount, renderPlainText
+  totalAmount, renderPlainText, enrichPerformance
 }
    = require('./statement');
 
@@ -46,9 +46,22 @@ test('totalAmount', () => {
 });
 
 test('renderPlainText', () => {
-  const statementData = {};
-  statementData.customer = invoices[0].customer;
-  statementData.performances = invoices[0].performances;
+  const statementData =
+  [{
+    playID: 'hamlet',
+    audience: 55,
+    play: { name: 'Hamlet', type: 'tragedy' }
+  },
+  {
+    playID: 'as-like',
+    audience: 35,
+    play: { name: 'As You Like It', type: 'comedy' }
+  },
+  {
+    playID: 'othello',
+    audience: 40,
+    play: { name: 'Othello', type: 'tragedy' }
+  }];
   let result = 'Statement for BigCo\n';
   result += '  Hamlet: $650.00 (55 seats)\n';
   result += '  As You Like It: $580.00 (35 seats)\n';
@@ -56,4 +69,26 @@ test('renderPlainText', () => {
   result += 'Amount owed is $1,730.00\n';
   result += 'You earned 47 credits\n';
   expect(renderPlainText(statementData, plays)).toBe(result);
+});
+
+test('enrichPerformance', () =>{
+  const results =
+  [{
+    playID: 'hamlet',
+    audience: 55,
+    play: { name: 'Hamlet', type: 'tragedy' }
+  },
+  {
+    playID: 'as-like',
+    audience: 35,
+    play: { name: 'As You Like It', type: 'comedy' }
+  },
+  {
+    playID: 'othello',
+    audience: 40,
+    play: { name: 'Othello', type: 'tragedy' }
+  }];
+  expect(enrichPerformance(invoices[0].performances[0])).toStrictEqual(results[0]);
+  expect(enrichPerformance(invoices[0].performances[1])).toStrictEqual(results[1]);
+  expect(enrichPerformance(invoices[0].performances[2])).toStrictEqual(results[2]);
 });
