@@ -5,7 +5,7 @@ function statement (invoice, plays) {
   const statementData = {};
   statementData.customer = invoice.customer;
   statementData.performances = invoice.performances.map(enrichPerformance);
-  console.log(statementData);
+  //console.log(JSON.stringify(statementData));
   return renderPlainText(statementData, plays);
   
 }
@@ -93,7 +93,7 @@ module.exports =
 //module.exports.statement=statement;
 //module.exports.amountFor=amountFor;
 
-console.log(statement(invoices[0],plays));
+//statement(invoices[0],plays);
 /*let aPerformances = invoices[0].aPerformanceormances
 console.log(aPerformances[0].playID);
 console.log(plays["hamlet"]);

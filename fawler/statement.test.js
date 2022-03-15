@@ -47,21 +47,22 @@ test('totalAmount', () => {
 
 test('renderPlainText', () => {
   const statementData =
-  [{
-    playID: 'hamlet',
-    audience: 55,
-    play: { name: 'Hamlet', type: 'tragedy' }
-  },
-  {
-    playID: 'as-like',
-    audience: 35,
-    play: { name: 'As You Like It', type: 'comedy' }
-  },
-  {
-    playID: 'othello',
-    audience: 40,
-    play: { name: 'Othello', type: 'tragedy' }
-  }];
+    {"customer":"BigCo",
+      "performances":[
+        {"playID":"hamlet",
+          "audience":55,
+          "play":{"name":"Hamlet", "type":"tragedy"}
+        },
+        {"playID":"as-like",
+          "audience":35,
+          "play":{"name":"As You Like It","type":"comedy"}
+        },
+        {"playID":"othello",
+          "audience":40,
+          "play":{"name":"Othello","type":"tragedy"}
+        }
+      ]
+    };
   let result = 'Statement for BigCo\n';
   result += '  Hamlet: $650.00 (55 seats)\n';
   result += '  As You Like It: $580.00 (35 seats)\n';
