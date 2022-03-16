@@ -10,15 +10,18 @@ const statementData =
   "performances":[
     {"playID":"hamlet",
       "audience":55,
-      "play":{"name":"Hamlet", "type":"tragedy"}
+      "play":{"name":"Hamlet", "type":"tragedy"},
+      "amount": 65000
     },
     {"playID":"as-like",
       "audience":35,
-      "play":{"name":"As You Like It","type":"comedy"}
+      "play":{"name":"As You Like It","type":"comedy"},
+      "amount": 58000
     },
     {"playID":"othello",
       "audience":40,
-      "play":{"name":"Othello","type":"tragedy"}
+      "play":{"name":"Othello","type":"tragedy"},
+      "amount": 50000
     }
   ]
 };
@@ -42,22 +45,25 @@ test('amountFor', () => {
 
 test(`volumeCreditsFor`, () => {
   const statementData =
-    { "customer":"BigCo",
-      "performances":[
-        {"playID":"hamlet",
-          "audience":55,
-          "play":{"name":"Hamlet", "type":"tragedy"}
-        },
-        {"playID":"as-like",
-          "audience":35,
-          "play":{"name":"As You Like It","type":"comedy"}
-        },
-        {"playID":"othello",
-          "audience":40,
-          "play":{"name":"Othello","type":"tragedy"}
-        }
-      ]
-    };
+  { "customer":"BigCo",
+  "performances":[
+    {"playID":"hamlet",
+      "audience":55,
+      "play":{"name":"Hamlet", "type":"tragedy"},
+      "amount": 65000
+    },
+    {"playID":"as-like",
+      "audience":35,
+      "play":{"name":"As You Like It","type":"comedy"},
+      "amount": 58000
+    },
+    {"playID":"othello",
+      "audience":40,
+      "play":{"name":"Othello","type":"tragedy"},
+      "amount": 50000
+    }
+  ]
+};
   expect(volumeCreditsFor(statementData.performances[0])).toBe(25);
   expect(volumeCreditsFor(statementData.performances[1])).toBe(12);
   expect(volumeCreditsFor(statementData.performances[2])).toBe(10);
@@ -76,7 +82,7 @@ test('totalVolumeCredits', () => {
 });
 
 test('totalAmount', () => {
-  expect(totalAmount(invoices[0])).toBe(173000);
+  expect(totalAmount(statementData)).toBe(173000);
 });
 
 test('renderPlainText', () => {
@@ -85,15 +91,18 @@ test('renderPlainText', () => {
       "performances":[
         {"playID":"hamlet",
           "audience":55,
-          "play":{"name":"Hamlet", "type":"tragedy"}
+          "play":{"name":"Hamlet", "type":"tragedy"},
+          "amount": 65000
         },
         {"playID":"as-like",
           "audience":35,
-          "play":{"name":"As You Like It","type":"comedy"}
+          "play":{"name":"As You Like It","type":"comedy"},
+          "amount": 58000
         },
         {"playID":"othello",
           "audience":40,
-          "play":{"name":"Othello","type":"tragedy"}
+          "play":{"name":"Othello","type":"tragedy"},
+          "amount": 50000
         }
       ]
     };
@@ -111,18 +120,22 @@ test('enrichPerformance', () =>{
   [{
     playID: 'hamlet',
     audience: 55,
-    play: { name: 'Hamlet', type: 'tragedy' }
+    play: { name: 'Hamlet', type: 'tragedy' },
+    amount: 65000
   },
   {
     playID: 'as-like',
     audience: 35,
-    play: { name: 'As You Like It', type: 'comedy' }
+    play: { name: 'As You Like It', type: 'comedy' },
+    amount: 58000
   },
   {
     playID: 'othello',
     audience: 40,
-    play: { name: 'Othello', type: 'tragedy' }
+    play: { name: 'Othello', type: 'tragedy' },
+    amount: 50000
   }];
+  
   expect(enrichPerformance(invoices[0].performances[0])).toStrictEqual(results[0]);
   expect(enrichPerformance(invoices[0].performances[1])).toStrictEqual(results[1]);
   expect(enrichPerformance(invoices[0].performances[2])).toStrictEqual(results[2]);
