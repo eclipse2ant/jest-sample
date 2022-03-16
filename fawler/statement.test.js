@@ -5,6 +5,23 @@ const {statement, amountFor, volumeCreditsFor, usd, totalvolumeCredits,
 
 const invoices = require('./invoices.json');
 const plays = require('./plays.json');
+const statementData =
+{ "customer":"BigCo",
+  "performances":[
+    {"playID":"hamlet",
+      "audience":55,
+      "play":{"name":"Hamlet", "type":"tragedy"}
+    },
+    {"playID":"as-like",
+      "audience":35,
+      "play":{"name":"As You Like It","type":"comedy"}
+    },
+    {"playID":"othello",
+      "audience":40,
+      "play":{"name":"Othello","type":"tragedy"}
+    }
+  ]
+};
 
 
 test('statement', () => {
@@ -24,9 +41,26 @@ test('amountFor', () => {
 });
 
 test(`volumeCreditsFor`, () => {
-  expect(volumeCreditsFor(invoices[0].performances[0])).toBe(25);
-  expect(volumeCreditsFor(invoices[0].performances[1])).toBe(12);
-  expect(volumeCreditsFor(invoices[0].performances[2])).toBe(10);
+  const statementData =
+    { "customer":"BigCo",
+      "performances":[
+        {"playID":"hamlet",
+          "audience":55,
+          "play":{"name":"Hamlet", "type":"tragedy"}
+        },
+        {"playID":"as-like",
+          "audience":35,
+          "play":{"name":"As You Like It","type":"comedy"}
+        },
+        {"playID":"othello",
+          "audience":40,
+          "play":{"name":"Othello","type":"tragedy"}
+        }
+      ]
+    };
+  expect(volumeCreditsFor(statementData.performances[0])).toBe(25);
+  expect(volumeCreditsFor(statementData.performances[1])).toBe(12);
+  expect(volumeCreditsFor(statementData.performances[2])).toBe(10);
 });
 
 test(`usd`, () => {
@@ -38,7 +72,7 @@ test(`usd`, () => {
 });
 
 test('totalVolumeCredits', () => {
-  expect(totalvolumeCredits(invoices[0])).toBe(47);
+  expect(totalvolumeCredits(statementData)).toBe(47);
 });
 
 test('totalAmount', () => {
@@ -47,7 +81,7 @@ test('totalAmount', () => {
 
 test('renderPlainText', () => {
   const statementData =
-    {"customer":"BigCo",
+    { "customer":"BigCo",
       "performances":[
         {"playID":"hamlet",
           "audience":55,
