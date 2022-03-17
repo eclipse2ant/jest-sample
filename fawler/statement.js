@@ -58,7 +58,7 @@ function usd(aNumber) {
                         minimumFractionDigits: 2 }).format(aNumber);
 }
 
-function  renderPlainText(data, plays) {
+function  renderPlainText(data) {
   function totalAmount(data) {
     let result = 0;
     for (let perf of data.performances) {
@@ -66,6 +66,15 @@ function  renderPlainText(data, plays) {
     }
     return result;
   }
+
+  function totalvolumeCredits(data) {
+    let volumeCredits=0;
+    for (let perf of data.performances) {
+      volumeCredits += perf.volumeCredits;
+    }
+    return volumeCredits;
+  }
+  
 
   let result = `Statement for ${data.customer}\n`;
 
@@ -80,24 +89,17 @@ function  renderPlainText(data, plays) {
   return result;
  }
 
-function totalvolumeCredits(data) {
-  let volumeCredits=0;
-  for (let perf of data.performances) {
-    volumeCredits += volumeCreditsFor(perf);
-  }
-  return volumeCredits;
-}
 
 
 
 module.exports = 
- {statement, amountFor, volumeCreditsFor, usd, totalvolumeCredits,
+ {statement, amountFor, volumeCreditsFor, usd,
    renderPlainText, enrichPerformance, playFor
 };
 //module.exports.statement=statement;
 //module.exports.amountFor=amountFor;
 
-//console.log(statement(invoices[0],plays));
+console.log(statement(invoices[0],plays));
 /*let aPerformances = invoices[0].aPerformanceormances
 console.log(aPerformances[0].playID);
 console.log(plays["hamlet"]);

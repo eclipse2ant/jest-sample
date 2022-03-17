@@ -1,4 +1,4 @@
-const {statement, amountFor, volumeCreditsFor, usd, totalvolumeCredits,
+const {statement, amountFor, volumeCreditsFor, usd,
   renderPlainText, enrichPerformance, playFor
 }
    = require('./statement');
@@ -8,20 +8,23 @@ const plays = require('./plays.json');
 const statementData =
 { "customer":"BigCo",
   "performances":[
-    {"playID":"hamlet",
+    { "playID":"hamlet",
       "audience":55,
       "play":{"name":"Hamlet", "type":"tragedy"},
-      "amount": 65000
+      "amount": 65000,
+      "volumeCredits": 25
     },
-    {"playID":"as-like",
+    { "playID":"as-like",
       "audience":35,
       "play":{"name":"As You Like It","type":"comedy"},
-      "amount": 58000
+      "amount": 58000,
+      "volumeCredits": 12
     },
-    {"playID":"othello",
+    { "playID":"othello",
       "audience":40,
       "play":{"name":"Othello","type":"tragedy"},
-      "amount": 50000
+      "amount": 50000,
+      "volumeCredits": 10
     }
   ]
 };
@@ -84,9 +87,11 @@ test(`usd`, () => {
 });
 
 
+/*
 test('totalVolumeCredits', () => {
   expect(totalvolumeCredits(statementData)).toBe(47);
 });
+*/
 
 /*
 test('totalAmount', () => {
@@ -101,17 +106,20 @@ test('renderPlainText', () => {
         {"playID":"hamlet",
           "audience":55,
           "play":{"name":"Hamlet", "type":"tragedy"},
-          "amount": 65000
+          "amount": 65000,
+          "volumeCredits": 25
         },
         {"playID":"as-like",
           "audience":35,
           "play":{"name":"As You Like It","type":"comedy"},
-          "amount": 58000
+          "amount": 58000,
+          "volumeCredits": 12
         },
         {"playID":"othello",
           "audience":40,
           "play":{"name":"Othello","type":"tragedy"},
-          "amount": 50000
+          "amount": 50000,
+          "volumeCredits": 10
         }
       ]
     };
@@ -121,7 +129,7 @@ test('renderPlainText', () => {
   result += '  Othello: $500.00 (40 seats)\n';
   result += 'Amount owed is $1,730.00\n';
   result += 'You earned 47 credits\n';
-  expect(renderPlainText(statementData, plays)).toBe(result);
+  expect(renderPlainText(statementData)).toBe(result);
 });
 
 test('enrichPerformance', () =>{
