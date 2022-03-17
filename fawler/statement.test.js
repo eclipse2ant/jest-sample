@@ -1,5 +1,5 @@
 const {statement, amountFor, volumeCreditsFor, usd, totalvolumeCredits,
-  totalAmount, renderPlainText, enrichPerformance, playFor
+  renderPlainText, enrichPerformance, playFor
 }
    = require('./statement');
 
@@ -83,13 +83,16 @@ test(`usd`, () => {
   expect(usd(-0.005)).toBe('-$0.01');
 });
 
+
 test('totalVolumeCredits', () => {
   expect(totalvolumeCredits(statementData)).toBe(47);
 });
 
+/*
 test('totalAmount', () => {
   expect(totalAmount(statementData)).toBe(173000);
 });
+*/
 
 test('renderPlainText', () => {
   const statementData =
@@ -127,19 +130,22 @@ test('enrichPerformance', () =>{
     playID: 'hamlet',
     audience: 55,
     play: { name: 'Hamlet', type: 'tragedy' },
-    amount: 65000
+    amount: 65000,
+    volumeCredits: 25
   },
   {
     playID: 'as-like',
     audience: 35,
     play: { name: 'As You Like It', type: 'comedy' },
-    amount: 58000
+    amount: 58000,
+    volumeCredits: 12
   },
   {
     playID: 'othello',
     audience: 40,
     play: { name: 'Othello', type: 'tragedy' },
-    amount: 50000
+    amount: 50000,
+    volumeCredits: 10
   }];
   
   expect(enrichPerformance(invoices[0].performances[0])).toStrictEqual(results[0]);
