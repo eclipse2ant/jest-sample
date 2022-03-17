@@ -90,7 +90,7 @@ function usd(aNumber) {
 
 module.exports = 
  {statement, amountFor, volumeCreditsFor, usd, totalvolumeCredits,
-  totalAmount, renderPlainText, enrichPerformance
+  totalAmount, renderPlainText, enrichPerformance, playFor
 };
 //module.exports.statement=statement;
 //module.exports.amountFor=amountFor;

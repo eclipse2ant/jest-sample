@@ -1,5 +1,5 @@
 const {statement, amountFor, volumeCreditsFor, usd, totalvolumeCredits,
-  totalAmount, renderPlainText, enrichPerformance
+  totalAmount, renderPlainText, enrichPerformance, playFor
 }
    = require('./statement');
 
@@ -35,6 +35,12 @@ test('statement', () => {
   result += 'Amount owed is $1,730.00\n';
   result += 'You earned 47 credits\n';
   expect(statement(invoices[0], plays)).toBe(result);
+});
+
+test('playFor', () => {
+  expect(playFor(invoices[0].performances[0])).toStrictEqual({"name":"Hamlet", "type":"tragedy"});
+  expect(playFor(invoices[0].performances[1])).toStrictEqual({"name":"As You Like It","type":"comedy"});
+  expect(playFor(invoices[0].performances[2])).toStrictEqual({"name":"Othello","type":"tragedy"});
 });
 
 test('amountFor', () => {
