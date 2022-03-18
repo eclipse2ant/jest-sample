@@ -25,8 +25,10 @@ const statementData =
       "play":{"name":"Othello","type":"tragedy"},
       "amount": 50000,
       "volumeCredits": 10
-    }
-  ]
+    },
+  ],
+  "totalAmount":173000,
+  "totalVolumeCredits":47
 };
 
 
@@ -71,7 +73,9 @@ test(`volumeCreditsFor`, () => {
       "play":{"name":"Othello","type":"tragedy"},
       "amount": 50000
     }
-  ]
+  ],
+  "totalAmount":173000,
+  "totalVolumeCredits":47
 };
   expect(volumeCreditsFor(statementData.performances[0])).toBe(25);
   expect(volumeCreditsFor(statementData.performances[1])).toBe(12);
@@ -121,7 +125,9 @@ test('renderPlainText', () => {
           "amount": 50000,
           "volumeCredits": 10
         }
-      ]
+      ],
+      "totalAmount":173000,
+      "totalVolumeCredits":47    
     };
   let result = 'Statement for BigCo\n';
   result += '  Hamlet: $650.00 (55 seats)\n';

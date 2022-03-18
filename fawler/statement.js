@@ -2,12 +2,32 @@ const invoices = require('./invoices.json');
 const plays = require('./plays.json');
 
 function statement (invoice, plays) {
+
   const statementData = {};
   statementData.customer = invoice.customer;
   statementData.performances = invoice.performances.map(enrichPerformance);
+  statementData.totalAmount = totalAmount(statementData);
+  statementData.totalVolumeCredits = totalVolumeCredits(statementData);
   //console.log(JSON.stringify(statementData));
   return renderPlainText(statementData, plays);
-  
+
+  function totalAmount(data) {
+    let result = 0;
+    for (let perf of data.performances) {
+        result += perf.amount;
+    }
+    return result;
+  }
+
+  function totalVolumeCredits(data) {
+    let volumeCredits=0;
+    for (let perf of data.performances) {
+      volumeCredits += perf.volumeCredits;
+    }
+    return volumeCredits;
+  }
+
+
 }
 
 function enrichPerformance(aPerformance) {
@@ -17,6 +37,8 @@ function enrichPerformance(aPerformance) {
   result.volumeCredits = volumeCreditsFor(result);
   //console.log(result);
   return result;
+
+
 }
 
 function playFor(aPerformance) {
@@ -59,21 +81,6 @@ function usd(aNumber) {
 }
 
 function  renderPlainText(data) {
-  function totalAmount(data) {
-    let result = 0;
-    for (let perf of data.performances) {
-        result += perf.amount;
-    }
-    return result;
-  }
-
-  function totalvolumeCredits(data) {
-    let volumeCredits=0;
-    for (let perf of data.performances) {
-      volumeCredits += perf.volumeCredits;
-    }
-    return volumeCredits;
-  }
   
 
   let result = `Statement for ${data.customer}\n`;
@@ -84,8 +91,8 @@ function  renderPlainText(data) {
     result += `  ${perf.play.name}: ${usd(perf.amount/100)} (${perf.audience} seats)\n`;
   }
 
-  result += `Amount owed is ${usd(totalAmount(data)/100)}\n`;
-  result += `You earned ${totalvolumeCredits(data)} credits\n`;
+  result += `Amount owed is ${usd(data.totalAmount/100)}\n`;
+  result += `You earned ${data.totalVolumeCredits} credits\n`;
   return result;
  }
 
