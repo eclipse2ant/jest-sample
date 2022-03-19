@@ -1,7 +1,6 @@
-const {statement, amountFor, volumeCreditsFor, usd,
-  renderPlainText, enrichPerformance, playFor
-}
-   = require('./statement');
+const {statement, usd, renderPlainText} = require('./statement');
+
+const {createStatementData} = require(`./createStatementData`);
 
 const invoices = require('./invoices.json');
 const plays = require('./plays.json');
@@ -42,6 +41,7 @@ test('statement', () => {
   expect(statement(invoices[0], plays)).toBe(result);
 });
 
+/*
 test('playFor', () => {
   expect(playFor(invoices[0].performances[0])).toStrictEqual({"name":"Hamlet", "type":"tragedy"});
   expect(playFor(invoices[0].performances[1])).toStrictEqual({"name":"As You Like It","type":"comedy"});
@@ -81,7 +81,7 @@ test(`volumeCreditsFor`, () => {
   expect(volumeCreditsFor(statementData.performances[1])).toBe(12);
   expect(volumeCreditsFor(statementData.performances[2])).toBe(10);
 });
-
+*/
 test(`usd`, () => {
   expect(usd(10)).toBe('$10.00');
   expect(usd(0.1)).toBe('$0.10');
@@ -138,6 +138,7 @@ test('renderPlainText', () => {
   expect(renderPlainText(statementData)).toBe(result);
 });
 
+/*
 test('enrichPerformance', () =>{
   const results =
   [{
@@ -166,3 +167,4 @@ test('enrichPerformance', () =>{
   expect(enrichPerformance(invoices[0].performances[1])).toStrictEqual(results[1]);
   expect(enrichPerformance(invoices[0].performances[2])).toStrictEqual(results[2]);
 });
+*/
