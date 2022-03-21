@@ -1,4 +1,4 @@
-const {statement, usd, renderPlainText} = require('./statement');
+const {statement, usd, renderPlainText, htmlStatement} = require('./statement');
 
 const {createStatementData} = require(`./createStatementData`);
 
@@ -41,6 +41,18 @@ test('statement', () => {
   expect(statement(invoices[0], plays)).toBe(result);
 });
 
+test('htmlStatement', () => {
+  let result = "<h1>Statement for BigCo</h1>\n";
+  result += "<table>\n";
+  result += "<tr><th>play</th><th>seats</th><th>cost</th></tr>  ";
+  result += "<tr><td>Hamlet</td><td>55</td><td>$65,000.00</td></tr>\n";
+  result += "  <tr><td>As You Like It</td><td>35</td><td>$58,000.00</td></tr>\n";
+  result += "  <tr><td>Othello</td><td>40</td><td>$50,000.00</td></tr>\n";
+  result += "</table>\n";
+  result += "<p>Amount owed is <em>$173,000.00</em></p>\n";
+  result += "<p>You earned <em>47</em> credits</p>\n";
+  expect(htmlStatement(invoices[0],plays)).toBe(result);
+});
 /*
 test('playFor', () => {
   expect(playFor(invoices[0].performances[0])).toStrictEqual({"name":"Hamlet", "type":"tragedy"});
