@@ -12,8 +12,8 @@ function createStatementData(invoice, plays) {
     const result = Object.assign({}, aPerformance);
     result.play = calculator.play;
 //    console.log(result);
-    result.amount = amountFor(result);
-    result.volumeCredits = volumeCreditsFor(result);
+    result.amount = calculator.amount;
+    result.volumeCredits = calculator.volumeCredits;
 //    console.log(result);
     return result;
   }
@@ -27,12 +27,9 @@ function createStatementData(invoice, plays) {
   }
   
   function volumeCreditsFor(aPerformance) {
-    let result = 0;
-      result += Math.max(aPerformance.audience - 30, 0);
-      if ("comedy" === aPerformance.play.type) result += Math.floor(aPerformance.audience / 5);
-      return result;
-  }
-  
+    return new PerformanceCalculator(aPerformance, playFor(aPerformance)).volumeCredits;
+  }  
+
   function totalAmount(data) {
     return data.performances
     .reduce((total, p) => total + p.amount, 0);
@@ -70,6 +67,13 @@ class PerformanceCalculator {
       default:
         throw new Error(`unknown type: ${this.play.type}`);
     }
+    return result;
+  }
+
+  get volumeCredits() {
+    let result = 0;
+    result += Math.max(this.performance.audience - 30, 0);
+    if ("comedy" === this.play.type) result += Math.floor(this.performance.audience / 5);
     return result;
   }
 }

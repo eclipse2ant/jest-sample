@@ -42,6 +42,7 @@ test('PerformanceCalculator', () => {
   expect(calculator.performance).toStrictEqual({ playID: 'hamlet', audience: 55 });
   expect(calculator.play).toStrictEqual( { name: 'Hamlet', type: 'tragedy' });
   expect(calculator.amount).toBe(65000);
+  expect(calculator.volumeCredits).toBe(25);
 //  console.log(calculator);
 }); 
 
