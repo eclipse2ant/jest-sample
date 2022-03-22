@@ -8,7 +8,7 @@ function createStatementData(invoice, plays) {
   return statementData;
 
   function enrichPerformance(aPerformance) {
-    const calculator = new PerformanceCalculator(aPerformance,  playFor(aPerformance));
+    const calculator = createPerformanceCalculator(aPerformance, playFor(aPerformance));
     const result = Object.assign({}, aPerformance);
     result.play = calculator.play;
 //    console.log(result);
@@ -42,6 +42,16 @@ function createStatementData(invoice, plays) {
 
 }
 
+function createPerformanceCalculator(aPerformance, aPlay) {
+  switch(aPlay.type) {
+    case "tragedy": return new TragedyCalculator(aPerformance, aPlay);
+    case "comedy" : return new ComedyCalculator(aPerformance, aPlay);
+    default:
+        throw new Error(`unknown type: ${aPlay.type}`);
+    }
+}
+
+
 class PerformanceCalculator {
   constructor(aPerformance, aplay) {
     this.performance = aPerformance;
@@ -52,11 +62,8 @@ class PerformanceCalculator {
     let result = 0;
     switch (this.play.type) {
       case "tragedy":
+        throw 'bad thing';
         result = 40000;
-        if (this.performance.audience > 30) {
-          result += 1000 * (this.performance.audience - 30);
-        }
-        break;
       case "comedy":
         result = 30000;
         if (this.performance.audience > 20) {
@@ -79,4 +86,20 @@ class PerformanceCalculator {
 }
 
 
-module.exports =  {createStatementData, PerformanceCalculator};
+class TragedyCalculator extends PerformanceCalculator {
+  get amount() {
+    let result = 40000;
+    if (this.performance.audience > 30) {
+      result += 1000 * (this.performance.audience - 30);
+    }
+    return result;
+  }
+}
+
+class ComedyCalculator extends PerformanceCalculator {
+}
+
+
+module.exports =  {createStatementData, PerformanceCalculator,
+  createPerformanceCalculator
+};

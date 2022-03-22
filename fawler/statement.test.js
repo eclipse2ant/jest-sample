@@ -3,7 +3,9 @@ const {statement, usd, renderPlainText, htmlStatement
 
 = require('./statement');
 
-const {createStatementData, PerformanceCalculator} 
+const {createStatementData, PerformanceCalculator,
+  createPerformanceCalculator
+} 
 
 = require(`./createStatementData`);
 
@@ -36,13 +38,22 @@ const statementData =
 };
 
 test('PerformanceCalculator', () => {
-  const aPerformance = invoices[0].performances[0];
-  const aplay = {"name":"Hamlet", "type":"tragedy"};
-  const calculator = new PerformanceCalculator(aPerformance, aplay);
+  let aPerformance = invoices[0].performances[0];
+  let aplay = {"name":"Hamlet", "type":"tragedy"};
+  let calculator = createPerformanceCalculator(aPerformance, aplay);
   expect(calculator.performance).toStrictEqual({ playID: 'hamlet', audience: 55 });
   expect(calculator.play).toStrictEqual( { name: 'Hamlet', type: 'tragedy' });
   expect(calculator.amount).toBe(65000);
   expect(calculator.volumeCredits).toBe(25);
+
+  aPerformance = invoices[0].performances[1];
+  aplay = {"name":"As You Like It", "type":"comedy"};
+  calculator = createPerformanceCalculator(aPerformance, aplay);
+  expect(calculator.performance).toStrictEqual({ playID: 'as-like', audience: 35 });
+  expect(calculator.play).toStrictEqual( { name: 'As You Like It', type: 'comedy' });
+  expect(calculator.amount).toBe(58000);
+  expect(calculator.volumeCredits).toBe(12);
+
 //  console.log(calculator);
 }); 
 
