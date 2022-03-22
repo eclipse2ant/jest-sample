@@ -41,6 +41,7 @@ test('PerformanceCalculator', () => {
   const calculator = new PerformanceCalculator(aPerformance, aplay);
   expect(calculator.performance).toStrictEqual({ playID: 'hamlet', audience: 55 });
   expect(calculator.play).toStrictEqual( { name: 'Hamlet', type: 'tragedy' });
+  expect(calculator.amount).toBe(65000);
 //  console.log(calculator);
 }); 
 
