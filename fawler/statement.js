@@ -49,7 +49,7 @@ module.exports =
 //module.exports.statement=statement;
 //module.exports.amountFor=amountFor;
 
-//console.log(statement(invoices[0],plays));
+console.log(statement(invoices[0],plays));
 /*let aPerformances = invoices[0].aPerformanceormances
 console.log(aPerformances[0].playID);
 console.log(plays["hamlet"]);

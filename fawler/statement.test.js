@@ -1,6 +1,11 @@
-const {statement, usd, renderPlainText, htmlStatement} = require('./statement');
+const {statement, usd, renderPlainText, htmlStatement
+}
 
-const {createStatementData} = require(`./createStatementData`);
+= require('./statement');
+
+const {createStatementData, PerformanceCalculator} 
+
+= require(`./createStatementData`);
 
 const invoices = require('./invoices.json');
 const plays = require('./plays.json');
@@ -30,6 +35,14 @@ const statementData =
   "totalVolumeCredits":47
 };
 
+test('PerformanceCalculator', () => {
+  const aPerformance = invoices[0].performances[0];
+  const aplay = {"name":"Hamlet", "type":"tragedy"};
+  const calculator = new PerformanceCalculator(aPerformance, aplay);
+  expect(calculator.performance).toStrictEqual({ playID: 'hamlet', audience: 55 });
+  expect(calculator.play).toStrictEqual( { name: 'Hamlet', type: 'tragedy' });
+//  console.log(calculator);
+}); 
 
 test('statement', () => {
   let result = 'Statement for BigCo\n';
@@ -175,6 +188,7 @@ test('enrichPerformance', () =>{
     volumeCredits: 10
   }];
   
+
   expect(enrichPerformance(invoices[0].performances[0])).toStrictEqual(results[0]);
   expect(enrichPerformance(invoices[0].performances[1])).toStrictEqual(results[1]);
   expect(enrichPerformance(invoices[0].performances[2])).toStrictEqual(results[2]);

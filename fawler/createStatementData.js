@@ -8,12 +8,13 @@ function createStatementData(invoice, plays) {
   return statementData;
 
   function enrichPerformance(aPerformance) {
-    const calculator = new PerformanceCalculator(aPerformance);
+    const calculator = new PerformanceCalculator(aPerformance,  playFor(aPerformance));
     const result = Object.assign({}, aPerformance);
-    result.play = playFor(result);
+    result.play = calculator.play;
+//    console.log(result);
     result.amount = amountFor(result);
     result.volumeCredits = volumeCreditsFor(result);
-    //console.log(result);
+//    console.log(result);
     return result;
   }
 
@@ -63,10 +64,11 @@ function createStatementData(invoice, plays) {
 }
 
 class PerformanceCalculator {
-  constructor(aPerformance) {
+  constructor(aPerformance, aplay) {
     this.performance = aPerformance;
+    this.play = aplay;
   }
 }
 
 
-module.exports =  {createStatementData};
+module.exports =  {createStatementData, PerformanceCalculator};
